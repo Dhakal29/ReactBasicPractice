@@ -4,7 +4,7 @@ import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import Profile from './Profile.jsx'
 import './App.css'
-
+import ShoppingList from './ShoppingList.jsx'
 function App() {
   const [count, setCount] = useState(0)
 
@@ -120,6 +120,7 @@ function App() {
       <div className="ticks"></div>
       <section id="spacer"></section>
     <Profile />
+    <ShoppingList />
     </>
   )
 }
