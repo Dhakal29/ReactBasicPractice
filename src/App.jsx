@@ -124,23 +124,11 @@ function App() {
     </>
   )
 }
-function Fruit() {
-  const x = 5;
-  let y = "Apple";
-  if (x < 10) {
-    y = "Banana";
-  }
-
-  return (
-    <h1>{y}</h1>
-  );
-}
 function MyButton() {
   console.log("Button clicked!");
   return (
     <button>I'm a button</button>
   );
 }
-export { Fruit };
 export { MyButton };
 export default App;
