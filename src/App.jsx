@@ -5,8 +5,17 @@ import heroImg from './assets/hero.png'
 import Profile from './Profile.jsx'
 import './App.css'
 import ShoppingList from './ShoppingList.jsx'
+
+const counters = [
+    { id: 1, label: 'Mangoes', step: 1, target: 3 },
+    { id: 2, label: 'Bananas', step: 5, target: 20 },
+    { id: 3, label: 'Oranges', step: 2, target: 10 },
+    { id: 4, label: 'Apples', step: 3, target: 15 },
+  ];
 function App() {
-  const [count, setCount] = useState(0)
+    const [count, setCount] = useState(0);
+
+    const filteredCounters = counters.filter(counter => counter.target >= 10);
 
   return (
     <>
@@ -121,24 +130,52 @@ function App() {
       <section id="spacer"></section>
     <Profile />
     <ShoppingList />
-    <MyButton />
+    {/* <MyButton/> */}
+    {counters.map(counter => (
+    <MyButton
+      key={counter.id}
+      label={counter.label}
+      step={counter.step}
+      target={counter.target}
+    />
+  ))}
+
     </>
   )
 }
- function MyButton() {
+  function MyButton({ label, step, target }) {
     const [clicks, setClicks] = useState(0);
 
     function handleClick() {
-      setClicks(previousClicks => previousClicks + 1);
+      setClicks(previousClicks => previousClicks + step);
+    }
+
+    function handleReset() {
+      setClicks(0);
     }
 
     return (
-      <button
-        className="counter practice-button"
-        onClick={handleClick}
-      >
-        Clicked {clicks} times
-      </button>
+      <div>
+        <button
+          className="counter practice-button"
+          onClick={handleClick}
+          disabled={clicks >= target}
+        >
+          {label}: {clicks}
+        </button>
+
+        <button
+          className="counter practice-button"
+          onClick={handleReset}
+          disabled={clicks === 0}
+        >
+          Reset
+        </button>
+
+        <p>
+          {clicks < target ? "Keep going!" : "Target reached!"}
+        </p>
+      </div>
     );
   }
 
