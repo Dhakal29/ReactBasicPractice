@@ -121,14 +121,20 @@ function App() {
       <section id="spacer"></section>
     <Profile />
     <ShoppingList />
+    <MyButton />
     </>
   )
 }
 function MyButton() {
-  console.log("Button clicked!");
-  return (
-    <button>I'm a button</button>
-  );
-}
+    function handleClick() {
+      console.log('Button clicked!');
+    }
+
+    return (
+      <button onClick={handleClick}>
+        I'm a button
+      </button>
+    );
+  }
 export { MyButton };
 export default App;
