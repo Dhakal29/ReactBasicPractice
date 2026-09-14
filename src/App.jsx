@@ -125,16 +125,22 @@ function App() {
     </>
   )
 }
-function MyButton() {
+ function MyButton() {
+    const [clicks, setClicks] = useState(0);
+
     function handleClick() {
-      console.log('Button clicked!');
+      setClicks(previousClicks => previousClicks + 1);
     }
 
     return (
-      <button className="counter practice-button" onClick={handleClick}>
-        I'm a button
+      <button
+        className="counter practice-button"
+        onClick={handleClick}
+      >
+        Clicked {clicks} times
       </button>
     );
   }
+
 export { MyButton };
 export default App;
