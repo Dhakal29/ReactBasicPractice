@@ -131,7 +131,7 @@ function MyButton() {
     }
 
     return (
-      <button onClick={handleClick}>
+      <button className="counter practice-button" onClick={handleClick}>
         I'm a button
       </button>
     );
