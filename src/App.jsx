@@ -13,12 +13,25 @@ const counters = [
     { id: 4, label: 'Apples', step: 3, target: 15 },
   ];
 function App() {
-    const [count, setCount] = useState(0);
-    const [showAll, setShowAll] = useState(true);
-    const [search, setSearch] = useState('');
-    const filteredCounters = showAll
-      ? counters
-      : counters.filter(counter => counter.target >= 10);
+  const [count, setCount] = useState(0);
+  const [showAll, setShowAll] = useState(true);
+  const [search, setSearch] = useState('');
+  const [newLabel, setNewLabel] = useState('');
+
+  const filteredCounters = counters.filter(counter => {
+    const matchesTarget = showAll || counter.target >= 10;
+
+    const matchesSearch = counter.label
+      .toLowerCase()
+      .includes(search.toLowerCase());
+
+    return matchesTarget && matchesSearch;
+  });
+
+  function handleAddCounter(event) {
+    event.preventDefault();
+    console.log('New counter name:', newLabel);
+  }
 
 
   return (
@@ -134,6 +147,19 @@ function App() {
       <section id="spacer"></section>
     <Profile />
     <ShoppingList />
+    <form onSubmit={handleAddCounter}>
+    <label>
+      New counter name:
+      <input
+        type="text"
+        value={newLabel}
+        onChange={event => setNewLabel(event.target.value)}
+        required
+      />
+    </label>
+
+    <button type="submit">Add counter</button>
+  </form>
     <label>
     Search counters:
     <input
