@@ -131,7 +131,7 @@ function App() {
     <Profile />
     <ShoppingList />
     {/* <MyButton/> */}
-    {counters.map(counter => (
+    {filteredCounters.map(counter => (
     <MyButton
       key={counter.id}
       label={counter.label}
