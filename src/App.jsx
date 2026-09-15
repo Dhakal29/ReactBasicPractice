@@ -14,8 +14,12 @@ const counters = [
   ];
 function App() {
     const [count, setCount] = useState(0);
+    const [showAll, setShowAll] = useState(true);
+    const [search, setSearch] = useState('');
+    const filteredCounters = showAll
+      ? counters
+      : counters.filter(counter => counter.target >= 10);
 
-    const filteredCounters = counters.filter(counter => counter.target >= 10);
 
   return (
     <>
@@ -130,6 +134,24 @@ function App() {
       <section id="spacer"></section>
     <Profile />
     <ShoppingList />
+    <label>
+    Search counters:
+    <input
+      type="text"
+      value={search}
+      onChange={event => setSearch(event.target.value)}
+      placeholder="Try typing Bananas"
+    />
+    <p>You are searching for:{search}</p>
+    </label>
+
+
+     <button
+    className="counter"
+    onClick={() => setShowAll(previousShowAll => !previousShowAll)}
+  >
+    {showAll ? "Show targets of 10 or more" : "Show all counters"}
+  </button>
     {/* <MyButton/> */}
     {filteredCounters.map(counter => (
     <MyButton
