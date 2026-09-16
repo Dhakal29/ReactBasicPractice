@@ -6,13 +6,14 @@ import Profile from './Profile.jsx'
 import './App.css'
 import ShoppingList from './ShoppingList.jsx'
 
-const counters = [
+const initialCounters = [
     { id: 1, label: 'Mangoes', step: 1, target: 3 },
     { id: 2, label: 'Bananas', step: 5, target: 20 },
     { id: 3, label: 'Oranges', step: 2, target: 10 },
     { id: 4, label: 'Apples', step: 3, target: 15 },
   ];
 function App() {
+  const [counters, setCounters] = useState(initialCounters);
   const [count, setCount] = useState(0);
   const [showAll, setShowAll] = useState(true);
   const [search, setSearch] = useState('');
@@ -27,11 +28,52 @@ function App() {
 
     return matchesTarget && matchesSearch;
   });
+  
 
+  function handleDeleteCounter(id) {
+    setCounters(previousCounters =>
+      previousCounters.filter(counter => counter.id !== id)
+    );
+  }
   function handleAddCounter(event) {
     event.preventDefault();
-    console.log('New counter name:', newLabel);
+    const label = newLabel.trim();
+
+    if (label === '') {
+      return;
+    }
+
+    const newCounter = {
+      id: crypto.randomUUID(),
+      label: label,
+      step: 1,
+      target: 10,
+    };
+
+    setCounters(previousCounters => [
+      ...previousCounters,
+      newCounter,
+    ]);
+
+    setNewLabel('');
   }
+  function handleDeleteCounter(id) {
+    console.log('Delete clicked. Counter ID:', id);
+    console.log('Counters before deletion:', counters);
+
+    setCounters(previousCounters =>
+      previousCounters.filter(counter => counter.id !== id)
+    );
+  }
+   function handleIncreaseTarget(id) {
+    setCounters(previousCounters =>
+      previousCounters.map(counter =>
+        counter.id === id
+          ? { ...counter, target: counter.target + 5 }
+          : counter
+      )
+    );
+  }  
 
 
   return (
@@ -185,13 +227,16 @@ function App() {
       label={counter.label}
       step={counter.step}
       target={counter.target}
+      onDelete={() => handleDeleteCounter(counter.id)}
+      onIncreaseTarget={() => handleIncreaseTarget(counter.id)}
     />
+  
   ))}
 
     </>
   )
 }
-  function MyButton({ label, step, target }) {
+  function MyButton({ label, step, target,onDelete, onIncreaseTarget }) {
     const [clicks, setClicks] = useState(0);
 
     function handleClick() {
@@ -204,25 +249,15 @@ function App() {
 
     return (
       <div>
-        <button
-          className="counter practice-button"
-          onClick={handleClick}
-          disabled={clicks >= target}
-        >
-          {label}: {clicks}
-        </button>
+        <p>Target: {target}</p>
 
-        <button
-          className="counter practice-button"
-          onClick={handleReset}
-          disabled={clicks === 0}
-        >
-          Reset
-        </button>
+  <button type="button" onClick={onIncreaseTarget}>
+    Increase target by 5
+  </button>
 
-        <p>
-          {clicks < target ? "Keep going!" : "Target reached!"}
-        </p>
+  <button type="button" onClick={onDelete}>
+    Delete
+  </button>
       </div>
     );
   }
