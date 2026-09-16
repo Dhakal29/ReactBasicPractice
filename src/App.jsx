@@ -6,11 +6,11 @@ import Profile from './Profile.jsx'
 import './App.css'
 import ShoppingList from './ShoppingList.jsx'
 
-const initialCounters = [
-    { id: 1, label: 'Mangoes', step: 1, target: 3 },
-    { id: 2, label: 'Bananas', step: 5, target: 20 },
-    { id: 3, label: 'Oranges', step: 2, target: 10 },
-    { id: 4, label: 'Apples', step: 3, target: 15 },
+ const initialCounters = [
+    { id: 1, label: 'Mangoes', step: 1, target: 3, clicks: 0 },
+    { id: 2, label: 'Bananas', step: 5, target: 20, clicks: 0 },
+    { id: 3, label: 'Oranges', step: 2, target: 10, clicks: 0 },
+    { id: 4, label: 'Apples', step: 3, target: 15, clicks: 0 },
   ];
 function App() {
   const [counters, setCounters] = useState(initialCounters);
@@ -30,11 +30,6 @@ function App() {
   });
   
 
-  function handleDeleteCounter(id) {
-    setCounters(previousCounters =>
-      previousCounters.filter(counter => counter.id !== id)
-    );
-  }
   function handleAddCounter(event) {
     event.preventDefault();
     const label = newLabel.trim();
@@ -48,6 +43,7 @@ function App() {
       label: label,
       step: 1,
       target: 10,
+      clicks: 0,
     };
 
     setCounters(previousCounters => [
@@ -75,7 +71,25 @@ function App() {
     );
   }  
 
+  function handleIncrement(id) {
+    setCounters(previousCounters =>
+      previousCounters.map(counter =>
+        counter.id === id && counter.clicks < counter.target
+          ? { ...counter, clicks: counter.clicks + counter.step }
+          : counter
+      )
+    );
+  }
 
+  function handleResetCounter(id) {
+    setCounters(previousCounters =>
+      previousCounters.map(counter =>
+        counter.id === id
+          ? { ...counter, clicks: 0 }
+          : counter
+      )
+    );
+  }
   return (
     <>
       <section id="center">
@@ -210,8 +224,8 @@ function App() {
       onChange={event => setSearch(event.target.value)}
       placeholder="Try typing Bananas"
     />
-    <p>You are searching for:{search}</p>
     </label>
+    <p>You are searching for: {search}</p>
 
 
      <button
@@ -220,12 +234,16 @@ function App() {
   >
     {showAll ? "Show targets of 10 or more" : "Show all counters"}
   </button>
-    {/* <MyButton/> */}
+    {filteredCounters.length === 0 && (
+      <p>No counters match your search and filter.</p>
+    )}
     {filteredCounters.map(counter => (
     <MyButton
       key={counter.id}
       label={counter.label}
-      step={counter.step}
+      clicks={counter.clicks}
+      onIncrement={() => handleIncrement(counter.id)}
+      onReset={() => handleResetCounter(counter.id)}
       target={counter.target}
       onDelete={() => handleDeleteCounter(counter.id)}
       onIncreaseTarget={() => handleIncreaseTarget(counter.id)}
@@ -236,19 +254,28 @@ function App() {
     </>
   )
 }
-  function MyButton({ label, step, target,onDelete, onIncreaseTarget }) {
-    const [clicks, setClicks] = useState(0);
-
-    function handleClick() {
-      setClicks(previousClicks => previousClicks + step);
-    }
-
-    function handleReset() {
-      setClicks(0);
-    }
-
+  function MyButton({ label, clicks, target,onIncrement,onReset,onDelete, onIncreaseTarget }) {
     return (
       <div>
+        <button
+          type="button"
+          className="counter practice-button"
+          onClick={onIncrement}
+          disabled={clicks >= target}
+        >
+          {label}: {clicks}
+        </button>
+
+        <button
+          type="button"
+          className="counter practice-button"
+          onClick={onReset}
+          disabled={clicks === 0}
+        >
+          Reset
+        </button>
+
+        <p>{clicks < target ? 'Keep going!' : 'Target reached!'}</p>
         <p>Target: {target}</p>
 
   <button type="button" onClick={onIncreaseTarget}>
