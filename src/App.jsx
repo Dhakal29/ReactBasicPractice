@@ -5,6 +5,7 @@ import heroImg from './assets/hero.png'
 import Profile from './Profile.jsx'
 import './App.css'
 import ShoppingList from './ShoppingList.jsx'
+import CounterCard from './CounterCard.jsx'
 
  const initialCounters = [
     { id: 1, label: 'Mangoes', step: 1, target: 3, clicks: 0 },
@@ -245,8 +246,11 @@ function App() {
     {filteredCounters.length === 0 && (
       <p>No counters match your search and filter.</p>
     )}
+    <button type="button" onClick={handleResetAll}>
+      Reset all counters
+    </button>
     {filteredCounters.map(counter => (
-    <MyButton
+    <CounterCard
       key={counter.id}
       label={counter.label}
       clicks={counter.clicks}
@@ -262,40 +266,5 @@ function App() {
     </>
   )
 }
-  function MyButton({ label, clicks, target,onIncrement,onReset,onDelete, onIncreaseTarget }) {
-    return (
-      <div>
-        <button
-          type="button"
-          className="counter practice-button"
-          onClick={onIncrement}
-          disabled={clicks >= target}
-        >
-          {label}: {clicks}
-        </button>
-
-        <button
-          type="button"
-          className="counter practice-button"
-          onClick={onReset}
-          disabled={clicks === 0}
-        >
-          Reset
-        </button>
-
-        <p>{clicks < target ? 'Keep going!' : 'Target reached!'}</p>
-        <p>Target: {target}</p>
-
-  <button type="button" onClick={onIncreaseTarget}>
-    Increase target by 5
-  </button>
-
-  <button type="button" onClick={onDelete}>
-    Delete
-  </button>
-      </div>
-    );
-  }
-
-export { MyButton };
+  
 export default App;
