@@ -90,6 +90,14 @@ function App() {
       )
     );
   }
+   function handleResetAll() {
+       setCounters(previousCounters =>
+         previousCounters.map(counter => ({
+           ...counter,
+           clicks: 0,
+         }))
+       );
+     }
   return (
     <>
       <section id="center">
