@@ -6,7 +6,7 @@ import Profile from './Profile.jsx'
 import './App.css'
 import ShoppingList from './ShoppingList.jsx'
 import CounterCard from './CounterCard.jsx'
-
+import AddCounterForm from './AddCounterForm.jsx'
  const initialCounters = [
     { id: 1, label: 'Mangoes', step: 1, target: 3, clicks: 0 },
     { id: 2, label: 'Bananas', step: 5, target: 20, clicks: 0 },
@@ -18,7 +18,7 @@ function App() {
   const [count, setCount] = useState(0);
   const [showAll, setShowAll] = useState(true);
   const [search, setSearch] = useState('');
-  const [newLabel, setNewLabel] = useState('');
+  // const [newLabel, setNewLabel] = useState('');
 
   const filteredCounters = counters.filter(counter => {
     const matchesTarget = showAll || counter.target >= 10;
@@ -31,17 +31,10 @@ function App() {
   });
   
 
-  function handleAddCounter(event) {
-    event.preventDefault();
-    const label = newLabel.trim();
-
-    if (label === '') {
-      return;
-    }
-
+  function handleAddCounter(label) {
     const newCounter = {
       id: crypto.randomUUID(),
-      label: label,
+      label,
       step: 1,
       target: 10,
       clicks: 0,
@@ -51,9 +44,11 @@ function App() {
       ...previousCounters,
       newCounter,
     ]);
-
-    setNewLabel('');
   }
+
+  
+
+
   function handleDeleteCounter(id) {
     console.log('Delete clicked. Counter ID:', id);
     console.log('Counters before deletion:', counters);
@@ -212,19 +207,7 @@ function App() {
       <section id="spacer"></section>
     <Profile />
     <ShoppingList />
-    <form onSubmit={handleAddCounter}>
-    <label>
-      New counter name:
-      <input
-        type="text"
-        value={newLabel}
-        onChange={event => setNewLabel(event.target.value)}
-        required
-      />
-    </label>
-
-    <button type="submit">Add counter</button>
-  </form>
+    <AddCounterForm onAdd={handleAddCounter} />
     <label>
     Search counters:
     <input
