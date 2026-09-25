@@ -3,16 +3,16 @@ import { useState } from 'react';
 const user = {
   name: 'Hedy Lamarr',
   imageUrl: 'https://react.dev/images/docs/scientists/yXOvdOSs.jpg',
-  imageSize: 50,
+  imageSize: 72,
 };
 
 const menuItemStyle = {
-  padding: '10px 14px',
+  padding: '12px 16px',
   background: 'transparent',
   border: 'none',
   textAlign: 'left',
   cursor: 'pointer',
-  fontSize: '14px',
+  fontSize: '15px',
   color: 'var(--text-h, #fff)',
   width: '100%',
 };
@@ -31,7 +31,7 @@ export default function Profile() {
   }
 
   return (
-    <div style={{ position: 'fixed', top: '16px', right: '20px', zIndex: 1000 }}>
+    <div style={{ position: 'fixed', top: '20px', right: '24px', zIndex: 1000 }}>
       {/* Clickable profile trigger */}
       <button
         type="button"
@@ -40,16 +40,18 @@ export default function Profile() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '6px',
-          padding: '10px 14px',
+          gap: '7px',
+          padding: '12px 24px',
+          minWidth: '130px',
           background: isOpen ? 'rgba(255, 255, 255, 0.15)' : 'rgba(255, 255, 255, 0.08)',
           backdropFilter: 'blur(8px)',
           WebkitBackdropFilter: 'blur(8px)',
-          borderRadius: '16px',
+          borderRadius: '20px',
           border: '1px solid var(--border)',
-          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+          boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2)',
           cursor: 'pointer',
           color: 'inherit',
+          transition: 'all 0.2s ease',
         }}
       >
         <img
@@ -60,9 +62,10 @@ export default function Profile() {
             height: user.imageSize,
             borderRadius: '50%',
             objectFit: 'cover',
+            border: '2px solid rgba(255, 255, 255, 0.2)',
           }}
         />
-        <span style={{ fontSize: '13px', fontWeight: 500, color: 'var(--text-h)' }}>
+        <span style={{ fontSize: '15px', fontWeight: 600, color: 'var(--text-h)' }}>
           {user.name} {isOpen ? '▲' : '▼'}
         </span>
       </button>
@@ -72,14 +75,14 @@ export default function Profile() {
         <div
           style={{
             position: 'absolute',
-            top: 'calc(100% + 8px)',
+            top: 'calc(100% + 10px)',
             right: 0,
-            width: '160px',
+            width: '195px',
             background: 'rgba(28, 28, 35, 0.95)',
             backdropFilter: 'blur(12px)',
             WebkitBackdropFilter: 'blur(12px)',
             border: '1px solid var(--border)',
-            borderRadius: '12px',
+            borderRadius: '14px',
             boxShadow: '0 8px 24px rgba(0, 0, 0, 0.35)',
             display: 'flex',
             flexDirection: 'column',
