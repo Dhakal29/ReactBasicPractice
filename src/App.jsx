@@ -8,8 +8,6 @@ import './App.css'
  const initialCounters = [
     { id: 1, label: 'Mangoes', step: 1, target: 3, clicks: 0 },
     { id: 2, label: 'Bananas', step: 5, target: 20, clicks: 0 },
-    { id: 3, label: 'Oranges', step: 2, target: 10, clicks: 0 },
-    { id: 4, label: 'Apples', step: 3, target: 15, clicks: 0 },
   ];
 function App() {
   const [counters, setCounters] = useState(initialCounters);
