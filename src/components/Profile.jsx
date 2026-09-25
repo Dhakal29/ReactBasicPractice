@@ -6,17 +6,6 @@ const user = {
   imageSize: 72,
 };
 
-const menuItemStyle = {
-  padding: '12px 16px',
-  background: 'transparent',
-  border: 'none',
-  textAlign: 'left',
-  cursor: 'pointer',
-  fontSize: '15px',
-  color: 'var(--text-h, #fff)',
-  width: '100%',
-};
-
 export default function Profile() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -32,27 +21,11 @@ export default function Profile() {
 
   return (
     <div style={{ position: 'fixed', top: '20px', right: '24px', zIndex: 1000 }}>
-      {/* Clickable profile trigger */}
+      {/* Clickable profile trigger with CSS hover effect */}
       <button
         type="button"
         onClick={() => setIsOpen(prev => !prev)}
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '7px',
-          padding: '12px 24px',
-          minWidth: '130px',
-          background: isOpen ? 'rgba(255, 255, 255, 0.15)' : 'rgba(255, 255, 255, 0.08)',
-          backdropFilter: 'blur(8px)',
-          WebkitBackdropFilter: 'blur(8px)',
-          borderRadius: '20px',
-          border: '1px solid var(--border)',
-          boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2)',
-          cursor: 'pointer',
-          color: 'inherit',
-          transition: 'all 0.2s ease',
-        }}
+        className={`profile-btn ${isOpen ? 'active' : ''}`}
       >
         <img
           src={user.imageUrl}
@@ -92,7 +65,7 @@ export default function Profile() {
           <button
             type="button"
             onClick={handleAbout}
-            style={menuItemStyle}
+            className="profile-dropdown-item"
           >
             👤 About
           </button>
@@ -103,7 +76,7 @@ export default function Profile() {
               alert('Opening Settings...');
               setIsOpen(false);
             }}
-            style={menuItemStyle}
+            className="profile-dropdown-item"
           >
             ⚙️ Settings
           </button>
@@ -113,7 +86,8 @@ export default function Profile() {
           <button
             type="button"
             onClick={handleLogout}
-            style={{ ...menuItemStyle, color: '#f87171' }}
+            className="profile-dropdown-item"
+            style={{ color: '#f87171' }}
           >
             🚪 Logout
           </button>
