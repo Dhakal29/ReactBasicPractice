@@ -24,8 +24,7 @@ function App() {
 
     return matchesTarget && matchesSearch;
   });
-  
-
+  console.log('Filtered Counters:', filteredCounters);
   function handleAddCounter(label) {
     const newCounter = {
       id: crypto.randomUUID(),
