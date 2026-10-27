@@ -131,6 +131,7 @@ function App() {
     />
   
   ))}
+    <h1>Welcome to React Basic Practice</h1>
 
     </main>
   )

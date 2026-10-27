@@ -41,7 +41,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     {/* Option A: Render your MyApp component */}
     <MyApp />
-
+    <App />
     {/* Option B: Render your full App project */}
     {/* <App /> */}
 
