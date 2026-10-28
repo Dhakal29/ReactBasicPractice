@@ -4,7 +4,7 @@ import ShoppingList from './components/ShoppingList.jsx'
 import CounterCard from './components/CounterCard.jsx'
 import AddCounterForm from './components/AddCounterForm.jsx'
 import './App.css'
-
+import Card from './components/Card.jsx'
 const person = {
   name: 'Leslie Alexander',
   email: 'leslie.alexander@example.com',
@@ -156,15 +156,7 @@ function App() {
     <h1 className="text-lg font-semibold text-gray-700 dark:text-gray-300 my-4 text-center">
       Welcome to React Basic Practice
     </h1>
-    <ul role="list" className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow mt-4">
-      <li className="flex py-4 first:pt-0 last:pb-0 items-center">
-        <img className="h-10 w-10 rounded-full object-cover" src={person.imageUrl} alt={person.name} />
-        <div className="ml-3 overflow-hidden">
-          <p className="text-sm font-medium text-gray-900 dark:text-white">{person.name}</p>
-          <p className="truncate text-sm text-gray-500 dark:text-gray-400">{person.email}</p>
-        </div>
-      </li>
-    </ul>
+    <Card person={person}/>
 
     </main>
   )
