@@ -5,10 +5,17 @@ import CounterCard from './components/CounterCard.jsx'
 import AddCounterForm from './components/AddCounterForm.jsx'
 import './App.css'
 
- const initialCounters = [
-    { id: 1, label: 'Mangoes', step: 1, target: 3, clicks: 0 },
-    { id: 2, label: 'Bananas', step: 5, target: 20, clicks: 0 },
-  ];
+const person = {
+  name: 'Leslie Alexander',
+  email: 'leslie.alexander@example.com',
+  imageUrl:
+    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+};
+
+const initialCounters = [
+  { id: 1, label: 'Mangoes', step: 1, target: 3, clicks: 0 },
+  { id: 2, label: 'Bananas', step: 5, target: 20, clicks: 0 },
+];
 function App() {
   const [counters, setCounters] = useState(initialCounters);
   const [showAll, setShowAll] = useState(true);
@@ -147,6 +154,15 @@ function App() {
   
   ))}
     <h1>Welcome to React Basic Practice</h1>
+    <ul role="list" className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow mt-4">
+      <li className="flex py-4 first:pt-0 last:pb-0 items-center">
+        <img className="h-10 w-10 rounded-full object-cover" src={person.imageUrl} alt={person.name} />
+        <div className="ml-3 overflow-hidden">
+          <p className="text-sm font-medium text-gray-900 dark:text-white">{person.name}</p>
+          <p className="truncate text-sm text-gray-500 dark:text-gray-400">{person.email}</p>
+        </div>
+      </li>
+    </ul>
 
     </main>
   )
