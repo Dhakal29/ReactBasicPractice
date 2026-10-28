@@ -153,7 +153,9 @@ function App() {
     />
   
   ))}
-    <h1>Welcome to React Basic Practice</h1>
+    <h1 className="text-lg font-semibold text-gray-700 dark:text-gray-300 my-4 text-center">
+      Welcome to React Basic Practice
+    </h1>
     <ul role="list" className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow mt-4">
       <li className="flex py-4 first:pt-0 last:pb-0 items-center">
         <img className="h-10 w-10 rounded-full object-cover" src={person.imageUrl} alt={person.name} />
