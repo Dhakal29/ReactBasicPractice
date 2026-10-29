@@ -1,14 +1,17 @@
 import React from 'react'
 
-function ColorPart({ color }) {
+function ColorPart({ color = 'olive' }) {
   return (
     <div
       style={{
         backgroundColor: color,
-        width: '100px',
-        height: '100px',
-        display: 'inline-block',
-        margin: '5px',
+        width: '100vw',
+        height: '100vh',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        margin: 0,
+        padding: 0,
       }}
     ></div>
   )
