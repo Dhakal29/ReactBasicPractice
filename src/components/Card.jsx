@@ -4,6 +4,7 @@ function Card({person}){
     if (!person) {
         return null; // Return null if person is not provided
     }
+    console.log('Card component received person prop:', person);
     return (
 <ul role="list" className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow mt-4">
       <li className="flex py-4 first:pt-0 last:pb-0 items-center">

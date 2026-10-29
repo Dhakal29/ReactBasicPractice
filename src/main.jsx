@@ -2,7 +2,7 @@ import React, { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
-
+import ColorPart from './components/ColorPart.jsx'
 // 1. Component function example:
 function MyApp() {
   return (
@@ -39,9 +39,10 @@ const reactElement = React.createElement(
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+  <ColorPart color="red" />
     {/* Option A: Render your MyApp component */}
-    <MyApp />
-    <App />
+    {/* <MyApp /> */}
+    {/* <App /> */}
     {/* Option B: Render your full App project */}
     {/* <App /> */}
 
