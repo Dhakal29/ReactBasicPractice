@@ -1,8 +1,9 @@
-import React, { StrictMode } from 'react'
+import React, { StrictMode,useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import ColorPart from './components/ColorPart.jsx'
+import Button from './components/Button.jsx'
 // 1. Component function example:
 function MyApp() {
   return (
@@ -37,22 +38,47 @@ const reactElement = React.createElement(
   'click here to visit google.com'
 )
 
+// 5. Interactive Background Color Changer Component:
+function ColorChangerApp() {
+  const [color, setColor] = useState('red');
+
+  return (
+    <>
+      {/* Dynamic full-screen background */}
+      <ColorPart color={color} />
+
+      {/* Buttons bar on top of the background */}
+      <div
+        style={{
+          position: 'relative',
+          zIndex: 10,
+          padding: '24px',
+          display: 'flex',
+          gap: '12px',
+          justifyContent: 'center',
+          flexWrap: 'wrap',
+        }}
+      >
+        <Button text="Red" bgColor="#dc2626" onClick={() => setColor('#dc2626')} />
+        <Button text="Blue" bgColor="#2563eb" onClick={() => setColor('#2563eb')} />
+        <Button text="Green" bgColor="#16a34a" onClick={() => setColor('#16a34a')} />
+        <Button text="Yellow" bgColor="#ca8a04" onClick={() => setColor('#ca8a04')} />
+        <Button text="Purple" bgColor="#9333ea" onClick={() => setColor('#9333ea')} />
+        <Button text="Black" bgColor="#18181b" onClick={() => setColor('#18181b')} />
+      </div>
+    </>
+  );
+}
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-  <ColorPart color="red" />
-    {/* Option A: Render your MyApp component */}
+    {/* Active: Background Color Changer */}
+    <ColorChangerApp />
+
+    {/* Other components you can uncomment to test: */}
     {/* <MyApp /> */}
     {/* <App /> */}
-    {/* Option B: Render your full App project */}
-    {/* <App /> */}
-
-    {/* Option C: Render a JSX variable directly */}
     {/* {anotherContainer} */}
-
-    {/* Option D: Render an official React.createElement */}
     {/* {reactElement} */}
-
-    {/* ❌ Invalid Option: You cannot render `anotherElement` because React rejects plain objects: */}
-    {/* {anotherElement} */}
   </StrictMode>,
 )
