@@ -4,6 +4,7 @@ import './index.css'
 import App from './App.jsx'
 import ColorPart from './components/ColorPart.jsx'
 import Button from './components/Button.jsx'
+import PasswordGenerator from './components/PasswordGenerator.jsx'
 // 1. Component function example:
 function MyApp() {
   return (
