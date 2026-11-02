@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react'
 
 function PasswordGenerator() {
   const [password, setPassword] = useState('')
-  const [length, setLength] = useState(12)
+  const [length, setLength] = useState(10)
   const [includeNumbers, setIncludeNumbers] = useState(true)
   const [includeSymbols, setIncludeSymbols] = useState(false)
   const [copied, setCopied] = useState(false)
@@ -28,8 +28,7 @@ function PasswordGenerator() {
   }
 
   return (
-    // <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
-      <div className="min-h-screen flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4">
       <div className="bg-gray-800 p-8 rounded-xl shadow-lg w-full max-w-md">
         <h1 className="text-white text-2xl font-bold mb-6 text-center">🔐 Password Generator</h1>
 
