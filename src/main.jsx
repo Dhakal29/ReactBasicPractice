@@ -67,19 +67,18 @@ function ColorChangerApp() {
         <Button text="Purple" bgColor="#9333ea" onClick={() => setColor('#9333ea')} />
         <Button text="Black" bgColor="#18181b" onClick={() => setColor('#18181b')} />
       </div>
+
+      {/* Password Generator below the color changer */}
+      <div style={{ position: 'relative', zIndex: 10 }}>
+        <PasswordGenerator />
+      </div>
     </>
   );
 }
-
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    {/* Active: Background Color Changer */}
     <ColorChangerApp />
-
-    {/* Other components you can uncomment to test: */}
-    {/* <MyApp /> */}
-    {/* <App /> */}
-    {/* {anotherContainer} */}
-    {/* {reactElement} */}
   </StrictMode>,
 )
+
+
