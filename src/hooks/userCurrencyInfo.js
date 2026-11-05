@@ -10,7 +10,7 @@ function useCurrencyInfo(currency) {
       .catch((err) => console.error('Currency fetch error:', err));
   }, [currency]);
   console.log('Currency data:', data);
-  console.log('Currency rates:', data);
+//   console.log('Currency rates:', data);
   return data;
 }
 
