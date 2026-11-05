@@ -1,6 +1,9 @@
 import { useState, useCallback } from 'react'
+import useCurrencyInfo from '../hooks/userCurrencyInfo'
 
 function PasswordGenerator() {
+  // Temporary: just to test the hook in console
+  const rates = useCurrencyInfo('USD')
   const [password, setPassword] = useState('')
   const [length, setLength] = useState(10)
   const [includeNumbers, setIncludeNumbers] = useState(true)
