@@ -7,6 +7,7 @@ import ColorPart from './components/ColorPart.jsx'
 import Button from './components/Button.jsx'
 import PasswordGenerator from './components/PasswordGenerator.jsx'
 import InputCurrency from './components/InputCurrency.jsx'
+import CurrencyConverter from './components/CurrencyConverter.jsx'
 // 1. Component function example:
 function MyApp() {
   return (
@@ -74,13 +75,17 @@ function ColorChangerApp() {
       <div style={{ position: 'relative', zIndex: 10 }}>
         <PasswordGenerator />
       </div>
+
+      {/* Currency Converter below */}
+      <div style={{ position: 'relative', zIndex: 10 }}>
+        <CurrencyConverter />
+      </div>
     </>
   );
 }
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ColorChangerApp />
-    <InputCurrency />
   </StrictMode>,
 )
 
