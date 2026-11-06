@@ -19,10 +19,14 @@ A personal learning project to practice core React concepts — built with **Rea
 
 ```
 src/
-├── main.jsx              # App entry point — renders ColorChangerApp (with PasswordGenerator inside)
+├── main.jsx              # App entry point — renders ColorChangerApp (with PasswordGenerator + CurrencyConverter inside)
 ├── App.jsx               # Practice playground (counters, profile card, shopping list)
 ├── index.css             # Global styles + Tailwind import
+├── hooks/
+│   └── userCurrencyInfo.js     # Custom hook — fetches live exchange rates from API
 └── components/
+    ├── CurrencyConverter.jsx   # 💱 Full currency converter (uses hook + InputCurrency)
+    ├── InputCurrency.jsx       # Reusable currency input field with dropdown
     ├── PasswordGenerator.jsx   # 🔐 Password Generator mini-app
     ├── ColorPart.jsx           # Full-screen background color component
     ├── Button.jsx              # Reusable button component
@@ -37,6 +41,32 @@ src/
 ---
 
 ## 🧩 Components Built
+
+### 💱 Currency Converter (`CurrencyConverter.jsx` + `InputCurrency.jsx` + `userCurrencyInfo.js`)
+A fully functional real-time currency converter featuring:
+- **From field** — type an amount and select the source currency
+- **To field** — select the target currency, displays the converted result (read-only)
+- **⇅ Swap button** — instantly swaps both currencies and amounts
+- **Convert button** — calculates `amount × rate` and shows the result
+- **160+ currencies** supported (USD, EUR, NPR, INR, GBP, JPY and more)
+- **Auto re-fetch** — API is called again whenever the `from` currency changes
+
+> Uses a **custom hook** `useCurrencyInfo(currency)` with `useState` + `useEffect`  
+> API: `https://open.exchangerate-api.com/v6/latest/{currency}` — **free, no API key needed**
+
+**Data flow:**
+```
+useCurrencyInfo(from)        ← fetches live rates from API
+      ↓ returns rates {}
+CurrencyConverter.jsx        ← manages state (amount, from, to, convertedAmount)
+      ↓ passes props
+InputCurrency (From)         ← user types amount + picks source currency
+InputCurrency (To)           ← shows result, read-only
+      ↓ on submit
+amount × rates[to]           ← conversion formula
+```
+
+---
 
 ### 🔐 Password Generator (`PasswordGenerator.jsx`)
 A fully interactive password generator featuring:
@@ -115,6 +145,8 @@ A learning exercise that manually implements a basic version of React's renderin
 - ✅ Functional components
 - ✅ `useState` hook (single values, booleans, arrays of objects)
 - ✅ `useCallback` hook for memoized functions
+- ✅ **Custom hooks** (`useCurrencyInfo`) with `useEffect` + `useState`
+- ✅ **API integration** with `fetch` (no API key, free open endpoint)
 - ✅ Props and prop destructuring
 - ✅ Conditional rendering (`&&`, ternary)
 - ✅ List rendering with `.map()` and `key`
