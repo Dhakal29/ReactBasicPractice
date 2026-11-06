@@ -6,7 +6,7 @@ import App from './App.jsx'
 import ColorPart from './components/ColorPart.jsx'
 import Button from './components/Button.jsx'
 import PasswordGenerator from './components/PasswordGenerator.jsx'
-
+import InputCurrency from './components/InputCurrency.jsx'
 // 1. Component function example:
 function MyApp() {
   return (
@@ -80,6 +80,7 @@ function ColorChangerApp() {
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ColorChangerApp />
+    <InputCurrency />
   </StrictMode>,
 )
 
