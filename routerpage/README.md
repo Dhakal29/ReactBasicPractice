@@ -1,16 +1,115 @@
-# React + Vite
+# Routerpage — React + Vite + Tailwind CSS
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A single-page React application built with Vite, React Router v7, and Tailwind CSS v4.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- [React 19](https://react.dev/)
+- [Vite 8](https://vite.dev/)
+- [React Router DOM v7](https://reactrouter.com/)
+- [Tailwind CSS v4](https://tailwindcss.com/) via `@tailwindcss/vite`
 
-## React Compiler
+## Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+# Install dependencies
+npm install
 
-## Expanding the ESLint configuration
+# Start development server
+npm run dev
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+## Project Structure
+
+```
+routerpage/
+├── public/
+├── src/
+│   ├── components/
+│   │   ├── About/
+│   │   │   └── About.jsx       # About page component
+│   │   ├── Footer/
+│   │   │   └── Footer.jsx      # Site-wide footer with navigation links
+│   │   ├── Header/
+│   │   │   └── Header.jsx      # Site-wide header with navbar
+│   │   ├── Home/
+│   │   │   └── Home.jsx        # Home page component
+│   │   └── Layout.jsx          # Shared layout (Header + Outlet + Footer)
+│   ├── App.jsx                 # Root app component
+│   ├── main.jsx                # Entry point — router setup with RouterProvider
+│   ├── index.css               # Global styles
+│   └── App.css                 # App-level styles
+├── index.html
+├── vite.config.js
+└── package.json
+```
+
+## Components
+
+### `Layout.jsx`
+Shared layout wrapper used as the root route element. Renders `<Header />`, `<Outlet />` (child page), and `<Footer />` on every page.
+
+### `Header.jsx`
+Sticky top navigation bar with logo, **Log in** and **Get started** links, and a Home nav item using React Router's `NavLink`.
+
+### `Home.jsx`
+Landing page featuring:
+- Two side-by-side landscape images (equal height, full width)
+- A **Download Now** button centered below the images
+
+### `About.jsx`
+About page featuring:
+- A full-width image alongside descriptive text content
+
+### `Footer.jsx`
+Site footer with:
+- Brand logo and tagline
+- Navigation links (Home, About)
+- Social media icon links (Discord, Twitter, GitHub, Dribbble)
+
+## Routing
+
+Routing is handled with `createBrowserRouter` and `RouterProvider` from React Router v7.
+
+```
+/         →  Layout  →  Home
+/about    →  Layout  →  About
+```
+
+```jsx
+// main.jsx
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      { path: '',      element: <Home /> },
+      { path: 'about', element: <About /> },
+    ],
+  },
+])
+```
+
+## Tailwind CSS Setup
+
+Tailwind v4 is configured via the Vite plugin (no `tailwind.config.js` needed):
+
+```js
+// vite.config.js
+import tailwindcss from '@tailwindcss/vite'
+
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+})
+```
+
+```css
+/* index.css */
+@import "tailwindcss";
+```
