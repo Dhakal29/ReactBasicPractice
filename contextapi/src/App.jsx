@@ -1,5 +1,6 @@
 
 import './App.css'
+import UserContextProvider from './context/UserContextProvider'
 
 function App() {
 
